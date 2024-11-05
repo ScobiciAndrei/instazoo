@@ -1,4 +1,4 @@
-package instazoo.service;
+package instazoo.security;
 
 public class SecurityConstants {
     public static final String SIGN_UP_URLS = "/api/auth/**";

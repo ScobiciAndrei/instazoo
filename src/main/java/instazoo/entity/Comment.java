@@ -1,23 +1,25 @@
 package instazoo.entity;
 
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
+@Data
+@Entity
 public class Comment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String caption;
-    private String location;
-    private Integer likes;
-
-    private Set<String> likedUsers = new HashSet<>();
-    private User user;
-    private List<Comment> comments = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Post post;
+    @Column(nullable = false)
+    private String userName;
+    @Column(nullable = false)
+    private Long userId;
+    @Column(columnDefinition = "text",nullable = false)
+    private String message;
+    @Column(updatable = false)
     private LocalDateTime createdDate;
 
     @PrePersist
